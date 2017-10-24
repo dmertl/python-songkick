@@ -14,6 +14,9 @@ class EventQuery(SongkickQuery):
         if 'musicbrainz_id' in self._query:
             return 'artists/mbid:%s/events.json' % \
                    self._query.pop('musicbrainz_id')
+        if 'artist_id' in self._query:
+            return 'artists/%s/calendar.json' % \
+                   self._query.pop('artist_id')
         return 'events.json'
 
 class GigographyQuery(EventQuery):
