@@ -26,11 +26,10 @@ class SongkickQuery(object):
         results_wrapper = page.get('results')
 
         if not cls.ResponseEnclosure in results_wrapper:
-            raise SongkickDecodeError("%s not found in results page." % \
-                                          cls.ResponseEnclosure)
-
-        # pull objects from response
-        object_list = results_wrapper.get(cls.ResponseEnclosure)
+            object_list = []
+        else:
+            # pull objects from response
+            object_list = results_wrapper.get(cls.ResponseEnclosure)
 
         for obj in object_list:
             yield cls.ResponseClass._from_json(obj)
